@@ -103,3 +103,11 @@ function filterTodo(e) {
 //   localStorage.setItem("todos", JSON.stringify(todos));
 // }
 
+function changeTheme() {
+  if(body.className === "light-mode"){
+    body.className = "";
+  }
+  else{
+    body.className = "light-mode";    
+  }
+}
