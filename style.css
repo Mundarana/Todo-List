@@ -24,6 +24,7 @@
   width: 40px;
   height: 40px;
   background-image: var(--image1);
+  cursor: pointer;
 }
 
 *{
@@ -126,7 +127,7 @@ form button:hover {
   background: var(--color5);
 }
 
-.fa-trash, .fa-check {
+.fa-trash, .fa-check, .fa-pen {
   pointer-events: none;
 }
 
