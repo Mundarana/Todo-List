@@ -9,6 +9,7 @@ const body = document.body;
 // Event Listeners
 todoButton.addEventListener("click", addTodo);
 todoList.addEventListener("click", deleteCheck);
+todoList.addEventListener("click", editTodo);
 filterOption.addEventListener("click", filterTodo);
 themes.addEventListener("click", changeTheme);
 
@@ -21,12 +22,20 @@ function addTodo(event) {
   const todoDiv =document.createElement("div");
   todoDiv.classList.add("todo");
     // Create LI
-  const newTodo = document.createElement("li");
-  newTodo.innerText = todoInput.value;
+  const newTodo = document.createElement("input");
+  newTodo.value = todoInput.value;
   newTodo.classList.add("todo-item");
+  newTodo.setAttribute("readonly", true);
   todoDiv.appendChild(newTodo);
-   ///Add Todo To Localstorage
+  
+    ///Add Todo To Localstorage
     //saveLocalTodos(todoInput.value);
+    // Edit Button
+  const editButton = document.createElement("button");
+  editButton.innerHTML = '<i class="fa-solid fa-pen"></i>';
+  editButton.classList.add ("edit-btn");
+  todoDiv.appendChild(editButton)
+
     // Check Mark Button
   const completedButton = document.createElement("button");
   completedButton.innerHTML = '<i class="fa-solid fa-check"></i>';
@@ -37,7 +46,7 @@ function addTodo(event) {
   trashButton.innerHTML = '<i class="fa-solid fa-trash"></i>';
   trashButton.classList.add("trash-btn");
   todoDiv.appendChild(trashButton);
-    // Append to List
+      // Append to List
   todoList.appendChild(todoDiv)
     // Clear Todo Input Value
   todoInput.value = "";
@@ -59,6 +68,28 @@ function deleteCheck(e) {
   if(item.classList[0] ==="complete-btn") {
     const todo = item.parentElement;
     todo.classList.toggle("completed");
+  }
+}
+
+//Edit Task
+function editTodo(e) {
+  let click_count = 0;
+  const task = e.target;
+  const todo = task.parentElement.childNodes[0];
+  if(task.classList[0] ==="edit-btn"){
+    todo.removeAttribute("readonly");
+    todo.focus();
+    document.body.addEventListener("click", function unselect() {
+      if(click_count > 0){
+      console.log("worked");
+      todo.setAttribute("readonly", true);
+      //Save to storage
+      document.body.removeEventListener("click", unselect)
+      }
+      else{
+        click_count++;
+      }
+    });
   }
 }
 

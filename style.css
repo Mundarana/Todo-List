@@ -1,7 +1,11 @@
 :root {
   --color1: white;
-  --color2: #d88771;
+  --color2: #dc7e64;
   --color3: #ff6f47;
+  --color4: #be2d2dd2;
+  --color5: #49cc49;
+  --border: white;
+  --text: #131313;
   --background-color: linear-gradient(120deg, #e2c35d, #fda085);
   --image1: url("./img/icons8-mond-40.png");
 }
@@ -9,7 +13,9 @@
 .light-mode {
   --color1: rgb(232, 231, 231);
   --color2: #d88771;
-  --color3: #481f14;
+  --color3: #571b0a;
+  --color4: #571b0a;
+  --color5: #571b0a;
   --background-color: linear-gradient(120deg, #2e2d29, #180702);
   --image1: url("./img/icons8-sonne-40.png");
 }
@@ -44,14 +50,26 @@ header, form {
   align-items: center;
 }
 
-form input, form button {
+input{
   padding: 0.5rem;
   font-size: 2rem;
   border: none;
-  background: var(--color1);
+  color: var(--text);
+  -moz-outline-radius: 3px;
+}
+
+input:focus{
+  outline-color: #dc7e64;
+}
+
+form input{
+  min-width: 25%;
 }
 
 form button {
+  padding: 0.5rem;
+  font-size: 2rem;
+  border: none;
   color: var(--color2);
   background: var(--color1);
   cursor: pointer;
@@ -70,14 +88,15 @@ form button:hover {
 }
 
 .todo-list {
-  min-width: 30%;
+  min-width: 65%;
+  width: auto;
   list-style: none;
 }
 
 .todo {
   margin: 0.5rem;
   background: var(--color1);
-  color: black;
+  color: var(--text);
   font-size: 1.5rem;
   display: flex;
   justify-content: space-between;
@@ -85,25 +104,26 @@ form button:hover {
   transition: all 0.5s ease;
 }
 
-.todo li {
+.todo input {
   flex:  1;
 }
 
-.trash-btn, .complete-btn {
+.trash-btn, .complete-btn, .edit-btn {
   background: var(--color3);
   color: var(--color1);
-  border: none;
+  border: 1px solid var(--border);
   padding: 1rem;
   cursor: pointer;
   font-size: 1rem;
+  transition: all 0.3s ease;
+}
+
+.trash-btn {
+  background: var(--color4);
 }
 
 .complete-btn {
-  background: rgb(73, 204, 73);
-}
-
-.todo-item {
-  padding: 0 0.5rem;
+  background: var(--color5);
 }
 
 .fa-trash, .fa-check {
@@ -132,10 +152,11 @@ select {
   margin: 1rem;
   position: relative;
   overflow: hidden;
+  border: 1px solid var(--border);
 }
 
 select {
-  color: var(--color3);
+  color: var(--text);
   width: 10rem;
   cursor: pointer;
   padding: 1rem;
@@ -153,6 +174,6 @@ select {
 }
 
 .select:hover:after {
-  background: var(--color1);
-  color: var(--color3);
+  background: var(--color2);
+  color: var(--color1);
 }
