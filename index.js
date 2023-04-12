@@ -29,7 +29,8 @@ function addTodo(event) {
   todoDiv.appendChild(newTodo);
   
     ///Add Todo To Localstorage
-    //saveLocalTodos(todoInput.value);
+    saveLocalTodos(todoInput.value);
+
     // Edit Button
   const editButton = document.createElement("button");
   editButton.innerHTML = '<i class="fa-solid fa-pen"></i>';
@@ -76,14 +77,20 @@ function editTodo(e) {
   let click_count = 0;
   const task = e.target;
   const todo = task.parentElement.childNodes[0];
+  const toBeReplacedTaskContent = todo.value;
+  let indexOfTaskContent;
+  console.log(toBeReplacedTaskContent);
   if(task.classList[0] ==="edit-btn"){
     todo.removeAttribute("readonly");
     todo.focus();
     document.body.addEventListener("click", function unselect() {
       if(click_count > 0){
       console.log("worked");
-      todo.setAttribute("readonly", true);
+      indexOfTaskContent = todo.indexOf(toBeReplacedTaskContent);
+      console.log(todo.value);
+      saveLocalTodos(todo[indexOfTaskContent]);
       //Save to storage
+      todo.setAttribute("readonly", true);
       document.body.removeEventListener("click", unselect)
       }
       else{
@@ -122,17 +129,17 @@ function filterTodo(e) {
   })
 }
 
-//   function saveLocalTodos(todo) {
-//      //Check---hey do I alredy have things in there?
-//   let todos;
-//   if(localStorage.getItem("todos") === null) {
-//     todos = [];
-//   } else {
-//     todos = JSON.parse(localStorage.getItem("todos"));
-//   }
-//   todos.push(todo);
-//   localStorage.setItem("todos", JSON.stringify(todos));
-// }
+  function saveLocalTodos(todo) {
+     //Check---hey do I alredy have things in there?
+  let todos;
+  if(localStorage.getItem("todos") === null) {
+    todos = [];
+  } else {
+    todos = JSON.parse(localStorage.getItem("todos"));
+  }
+  todos.push(todo);
+  localStorage.setItem("todos", JSON.stringify(todos));
+}
 
 function changeTheme() {
   if(body.className === "light-mode"){
